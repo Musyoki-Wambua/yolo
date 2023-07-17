@@ -9,6 +9,9 @@ services:
       - 3000:3000
     depends_on:
       - backend
+    networks:
+      - ip-network
+
   backend:
     build:
       context: ./backend
@@ -17,8 +20,16 @@ services:
       - 5000:5000
     depends_on:
       - mongodb
+    networks:
+      - ip-network
+      
   mongodb:
     image: mongo:latest
     restart: always
     volumes:
-      - ./data:/data/db
+      - mongodb_data:/data/db
+    networks:
+      - ip-network
+
+  networks:
+    ip-network:
