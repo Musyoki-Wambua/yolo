@@ -1,0 +1,23 @@
+---
+- name: Deploy Yolo App using Vagrant
+  hosts: all
+  become: true
+  become_user: root
+
+  tasks:
+  
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    - name: Clone the code from GitHub
+      git:
+        repo: git@github.com:Musyoki-Wambua/yolo.git
+        dest: /home/code/yolo
+        version: master  
