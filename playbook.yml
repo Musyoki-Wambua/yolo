@@ -28,7 +28,13 @@
         state: latest
         update_cache: true
 
-    
+    - name: Run Docker Compose
+      docker_compose:
+        project_src: "{{ playbook_dir }}"
+        state: started
+        detached: yes
+        tags: 
+          - docker
     
     - name: Install Git
       apt:
