@@ -1,11 +1,11 @@
 # Use an appropriate base image
-FROM node:14-alpine
+FROM node:16-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+COPY package.json package.json
 
 # Install project dependencies
 RUN npm install
