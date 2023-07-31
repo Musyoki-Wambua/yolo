@@ -5,12 +5,18 @@
   become_user: root
 
   tasks:
-  
+
     - name: Install aptitude
       apt:
         name: aptitude
         state: latest
         update_cache: true
+
+    - name: Add Docker GPG apt key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    
     - name: Install Git
       apt:
         name: git
