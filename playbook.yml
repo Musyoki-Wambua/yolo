@@ -4,37 +4,67 @@
   become: true
   become_user: root
 
+  vars:
+    name: "docker"
+
   tasks:
 
-    - name: Install aptitude
-      apt:
-        name: aptitude
-        state: latest
-        update_cache: true
+    # - name: Install aptitude
+    #   apt:
+    #     name: aptitude
+    #     state: latest
+    #     update_cache: true
 
-    - name: Add Docker GPG apt key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
+    # - name: Add Docker GPG apt key
+    #   apt_key:
+    #     url: https://download.docker.com/linux/ubuntu/gpg
+    #     state: present
 
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu focal stable
-        state: present
+    # - name: Add Docker Repository
+    #   apt_repository:
+    #     repo: deb https://download.docker.com/linux/ubuntu focal stable
+    #     state: present
 
-    - name: Update apt and install docker - ce
-      apt:
-        name: docker-ce
-        state: latest
-        update_cache: true
+    # - name: Update apt and install docker - ce
+    #   apt:
+    #     name: docker-ce
+    #     state: latest
+    #     update_cache: true
+
+    # - name: Install Pip3
+    #   apt:
+    #     name: python3-pip
+    #     state: present
+
+    # - name: Install and upgrade pip
+    #   pip:
+    #     name: pip
+    #     extra_args: --upgrade
+    #     executable: pip3
+
+    # - name: Install Docker Compose
+    #   pip:
+    #     name: docker-compose
+    #     executable: pip3
+    #     state: latest
+
+    # - name: Run Docker Compose
+    #   command: docker compose up -d
+    #   args:
+    #     chdir: /home/user/Development/DevOps/yolo/
+    #   tags: docker-compose
+
+    - name: Install Docker Compose
+      pip:
+        name: docker-compose
+        executable: pip3
 
     - name: Run Docker Compose
-      docker_compose:
-        project_src: "{{ playbook_dir }}"
-        state: started
-        detached: yes
-        tags: 
-          - docker
+      command: docker compose up -d
+      args:
+        chdir: /home/user/Development/DevOps/
+      tags: docker-compose
+
     
     - name: Install Git
       apt:
