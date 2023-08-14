@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: backend-container
-          image: josephmusyoki/yolo_backend
+          image: josephmusyoki/yolo_backend:v1.0.0
           ports:
             - containerPort: 5000
